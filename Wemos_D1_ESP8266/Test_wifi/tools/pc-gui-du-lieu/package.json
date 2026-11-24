@@ -1,0 +1,8 @@
+{
+  "name": "pc-gui-du-lieu-qua-esp8266",
+  "private": true,
+  "type": "module",
+  "description": "Gui du lieu gia lap tu PC (cung nguon voi web app) xuong ESP8266 qua USB, ESP8266 day len EMQX bang WiFi",
+  "scripts": { "start": "node gui.mjs" },
+  "dependencies": { "serialport": "^12.0.0" }
+}
