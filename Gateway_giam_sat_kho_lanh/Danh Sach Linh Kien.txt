@@ -1,0 +1,7 @@
+1. RAK within Sx1302 or sx1308 (bản Lora 433 or 923) such as gateway
+2. Module 4G A7680C
+3. Ethernet module
+
+Option#2:
+Sử dụng ESP32 làm MCU with Lora module (gateway)
+

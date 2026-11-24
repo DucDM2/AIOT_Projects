@@ -1,0 +1,52 @@
+menu "ESP32 Relay X2"
+
+    config APP_PIN_RELAY1
+        int "GPIO Relay 1 (relay ngoài cùng)"
+        range 0 31
+        default 16
+
+    config APP_PIN_RELAY2
+        int "GPIO Relay 2"
+        range 0 31
+        default 17
+
+    config APP_PIN_LED
+        int "GPIO LED trạng thái"
+        range 0 31
+        default 23
+
+    config APP_PIN_BUTTON
+        int "GPIO nút nhấn (BOOT/IO0)"
+        range 0 31
+        default 0
+
+    config APP_RELAY_ACTIVE_HIGH
+        bool "Relay hút khi chân ở mức CAO"
+        default y
+
+    config APP_LED_ACTIVE_LOW
+        bool "LED sáng khi chân ở mức THẤP"
+        default y
+
+    config APP_RELAY_MIN_SWITCH_MS
+        int "Khoảng cách tối thiểu giữa 2 lần đảo cùng relay (ms)"
+        range 50 10000
+        default 300
+
+    config APP_BUTTON_LONG_MS
+        int "Thời gian nhấn giữ (ms) – nhấn giữ = đảo Relay 2"
+        range 500 10000
+        default 1500
+
+    config APP_MQTT_TOPIC_PREFIX
+        string "Tiền tố topic MQTT"
+        default "relay2"
+        help
+            Topic: <prefix>/<device_id>/state (retain), <prefix>/<device_id>/cmd, <prefix>/<device_id>/ack
+
+    config APP_STATUS_HEARTBEAT_S
+        int "Chu kỳ gửi trạng thái định kỳ (giây)"
+        range 10 3600
+        default 60
+
+endmenu

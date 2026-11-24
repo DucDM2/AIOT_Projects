@@ -1,0 +1,6 @@
+.pio/
+include/secrets.h
+test/sim/build/
+tools/pc-gui-du-lieu/node_modules/
+release/
+sim/

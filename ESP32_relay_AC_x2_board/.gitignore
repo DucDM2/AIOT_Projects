@@ -1,0 +1,18 @@
+# PlatformIO / ESP-IDF
+.pio/
+build/
+sdkconfig
+sdkconfig.old
+sdkconfig.esp32_relay_x2
+managed_components/
+dependencies.lock
+
+# Bí mật – KHÔNG đưa lên git
+main/app_secrets.h
+
+# Build kiểm thử trên máy tính
+tests/host/build/
+reports/
+
+.vscode/
+sim/

@@ -1,0 +1,7 @@
+.pio/
+include/secrets.h
+wifi.env
+test/sim/build/
+tools/pc-gui-du-lieu/node_modules/
+release/
+sim/
