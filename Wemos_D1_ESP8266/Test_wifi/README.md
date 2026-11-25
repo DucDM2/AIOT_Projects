@@ -1,9 +1,9 @@
 # Test gateway kho lạnh qua WiFi (Wemos D1 – ESP8266) → EMQX → web app giám sát kho lạnh
 
-Bản chuyển từ `E:\AIOT_Projects\Gateway_giam_sat_kho_lanh\Test_wifi` (ESP32) sang **Wemos D1 (wemos.cc, bản 2015,
+Bản chuyển từ `Gateway_giam_sat_kho_lanh/Test_wifi` (ESP32) sang **Wemos D1 (wemos.cc, bản 2015,
 dạng Arduino UNO, ESP-12 / ESP8266, flash 4 MB, USB CH340)**. Cùng chức năng: board đóng vai **gateway kho lạnh
 UG65-0FA31C**, tạo dữ liệu cảm biến giả lập (hoặc nhận từ PC qua USB), gửi lên **EMQX Cloud (MQTT/TLS 8883)** đúng
-định dạng gateway Milesight mà web app `E:\App-giám-sat-kho-lạnh` đang nhận:
+định dạng gateway Milesight mà web app giám sát kho lạnh của AIoT Việt (không nằm trong repo này) đang nhận:
 
 ```
 cảm biến giả lập (ESP8266) ─┐
@@ -38,7 +38,7 @@ Log khi nối sẽ có dòng `[NET] broker ho tro MFLN -> bo dem TLS 1 KB`.
 
 1. `wifi.env` đã được chép sẵn từ bản ESP32 (cùng mạng WiFi). Muốn đổi thì sửa file này
    (**chỉ WiFi 2.4 GHz, WPA2**; router 2 băng tần thì dùng tên mạng 2.4G). Có thể khai thêm mạng dự phòng `WIFI_SSID_2`.
-2. Thông tin broker EMQX tự lấy từ `E:\App-giám-sat-kho-lạnh\cau-noi\.env` (MQTT_URL/USER/PASS) — không phải điền.
+2. Thông tin broker EMQX: chép `include/secrets.example.h` thành `include/secrets.h` rồi điền host, user, mật khẩu MQTT của **deployment EMQX của bạn** (file `secrets.h` đã nằm trong `.gitignore`).
 3. Driver USB: Wemos D1 dùng chip **CH340**. Cắm vào mà Device Manager không thấy cổng COM → cài driver CH340.
 
 ## 2. Build & nạp
@@ -80,6 +80,11 @@ Nạp lỗi → đóng mọi Serial Monitor đang mở cổng, đổi cáp USB (
 6. Gõ `status` để xem RAM: dòng `ESP8266 : heap lien tuc lon nhat ...` — nên luôn > 8 000 byte.
 
 ### Gửi dữ liệu giả lập từ PC qua board
+
+> ⚠️ `tools/pc-gui-du-lieu` và `tools/nghe-emqx.mjs` dùng thư viện mô phỏng của web app giám sát kho lạnh
+> (không nằm trong repo này) nên chỉ chạy được trong bộ chuyển giao đầy đủ. Firmware chạy độc lập với dữ liệu
+> giả lập có sẵn trên board; có thể kiểm bản tin trên EMQX bằng MQTTX.
+
 ```bash
 cd tools/pc-gui-du-lieu
 node gui.mjs --liet-ke

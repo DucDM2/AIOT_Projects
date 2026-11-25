@@ -2,8 +2,7 @@
 
 Cùng chức năng với `Test_module_4G`, chỉ thay đường truyền 4G (A7680C) bằng **WiFi có sẵn trên ESP32**.
 ESP32 đóng vai **gateway kho lạnh UG65-0FA31C**: tạo dữ liệu cảm biến giả lập (hoặc nhận từ PC qua USB),
-gửi lên **EMQX Cloud (MQTT/TLS 8883)** đúng định dạng gateway Milesight mà web app
-`E:\App-giám-sat-kho-lạnh` đang nhận:
+gửi lên **EMQX Cloud (MQTT/TLS 8883)** đúng định dạng gateway Milesight mà web app giám sát kho lạnh của AIoT Việt (không nằm trong repo này) đang nhận:
 
 ```
 cảm biến giả lập (ESP32)  ─┐
@@ -28,7 +27,7 @@ Các topic này **không** khớp `kholanh/+/up` nên không lẫn vào dữ li�
 
 1. Sao chép `wifi.env.example` → `wifi.env`, điền tên + mật khẩu WiFi (**chỉ WiFi 2.4 GHz**; router 2 băng tần
    thì dùng tên mạng 2.4G). Có thể khai thêm mạng dự phòng `WIFI_SSID_2` (vd phát từ điện thoại).
-2. Thông tin broker EMQX tự lấy từ `E:\App-giám-sat-kho-lạnh\cau-noi\.env` (MQTT_URL/USER/PASS) — không phải điền.
+2. Thông tin broker EMQX: chép `include/secrets.example.h` thành `include/secrets.h` rồi điền host, user, mật khẩu MQTT của **deployment EMQX của bạn** (file `secrets.h` đã nằm trong `.gitignore`).
 
 ## 2. Build & nạp
 
@@ -70,6 +69,10 @@ Hoặc VS Code + PlatformIO: `pio run -t upload` rồi `pio device monitor`.
 5. Thử cảnh báo vượt ngưỡng: gõ `ep A01=12` ở Serial Monitor (bỏ ép: `ep A01=off`).
 
 ### Gửi dữ liệu giả lập từ PC qua ESP32 (thay cho dữ liệu tạo trên ESP32)
+> ⚠️ Công cụ `tools/pc-gui-du-lieu` và `tools/nghe-emqx.mjs` dùng thư viện mô phỏng của web app giám sát kho lạnh
+> (không nằm trong repo này) nên chỉ chạy được trong bộ chuyển giao đầy đủ. Firmware bên trên chạy độc lập —
+> dùng dữ liệu giả lập có sẵn trên ESP32, hoặc kiểm bản tin bằng MQTTX.
+
 Dùng chung bộ mô phỏng của web app (`cau-noi/lib/mo-phong.mjs`), số liệu giống `gateway-gia.mjs` nhưng đi qua WiFi thật:
 ```bash
 cd tools/pc-gui-du-lieu

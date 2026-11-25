@@ -143,7 +143,7 @@ Chạy **đúng file `build/rak811_am2301.elf`** trên STM32L151 ảo. Model AM2
 - không trả lời nếu bị đọc lại trong vòng 2 s hoặc trong 2 s đầu sau cấp nguồn.
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File sim\run_sim.ps1 -Renode "C:\Users\hongh\Downloads\renode-1.17.0.windows-portable\renode_1.17.0-portable\renode.exe"
+powershell -ExecutionPolicy Bypass -File sim\run_sim.ps1 -Renode "<đường-dẫn-tới>\renode.exe"
 ```
 
 Kịch bản `sim/am2301_test.resc` chạy khoảng 75 s thời gian ảo (mất khoảng 3 phút thật). Log UART đầy đủ nằm trong

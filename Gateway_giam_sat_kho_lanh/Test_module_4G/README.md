@@ -1,8 +1,7 @@
 # Test module 4G A7680C + ESP32 → EMQX → web app giám sát kho lạnh
 
 ESP32 đóng vai **gateway kho lạnh**: tạo dữ liệu cảm biến giả lập (hoặc nhận từ PC qua USB), gửi qua
-**4G (A7680C)** lên **EMQX Cloud (MQTT/TLS 8883)** đúng định dạng gateway Milesight mà web app
-`E:\App-giám-sat-kho-lạnh` đang nhận:
+**4G (A7680C)** lên **EMQX Cloud (MQTT/TLS 8883)** đúng định dạng gateway Milesight mà web app giám sát kho lạnh của AIoT Việt (không nằm trong repo này) đang nhận:
 
 ```
 cảm biến giả lập (ESP32)  ─┐
@@ -46,7 +45,7 @@ trả lời ở `.../resp`). Các topic này **không** khớp `kholanh/+/up` n�
 ```bash
 tools/build.bat
 ```
-- Tự tạo `include/secrets.h` từ `E:\App-giám-sat-kho-lạnh\cau-noi\.env` (MQTT_URL/USER/PASS của EMQX),
+- Tạo `include/secrets.h` (chép từ `include/secrets.example.h`, điền MQTT host/user/mật khẩu EMQX của bạn) nếu chưa có,
   build, xuất `release/firmware_merged_0x0.bin` (1 file, nạp ở địa chỉ `0x0`).
 
 ```bash
@@ -75,6 +74,9 @@ Hoặc VS Code + PlatformIO: `pio run -t upload` rồi `pio device monitor`.
 5. Thử cảnh báo vượt ngưỡng: gõ `ep A01=12` ở Serial Monitor (bỏ ép: `ep A01=off`).
 
 ### Gửi dữ liệu giả lập từ PC qua ESP32 (thay cho dữ liệu tạo trên ESP32)
+> ⚠️ Công cụ `tools/pc-gui-du-lieu` dùng thư viện mô phỏng của web app giám sát kho lạnh (không nằm trong repo này)
+> nên chỉ chạy được trong bộ chuyển giao đầy đủ. Firmware chạy độc lập với dữ liệu giả lập có sẵn trên ESP32.
+
 Dùng **chung bộ mô phỏng của web app** (`cau-noi/lib/mo-phong.mjs`), số liệu giống `gateway-gia.mjs`
 nhưng đi qua đường 4G thật:
 ```bash

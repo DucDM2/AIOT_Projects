@@ -4,7 +4,7 @@
 
 - **Web cục bộ** – mở trình duyệt, bấm Bật/Tắt từng relay.
 - **MQTTS tới EMQX Cloud** – gửi trạng thái JSON, nhận lệnh JSON (bước sau: EMQX → Vercel → Supabase,
-  giống app `App-giám-sat-kho-lạnh`).
+  giống web app giám sát kho lạnh).
 - **Nút BOOT** trên bo: nhấn ngắn = đảo Relay 1, nhấn giữ 1,5 s = đảo Relay 2.
 - **Kiểm thử trên PC bằng bộ mô phỏng thanh ghi GPIO/IO_MUX của ESP32** – 330 phép kiểm, không cần bo mạch.
 
@@ -171,7 +171,7 @@ Kết quả và lệch chuẩn: [docs/MISRA.md](docs/MISRA.md).
 
 1. Nạp thử lên bo, kiểm relay bằng web cục bộ.
 2. Tạo deployment EMQX Cloud, điền `app_secrets.h`, kiểm bằng MQTTX.
-3. Làm app web (Next.js trên Vercel + Supabase) theo mẫu `App-giám-sat-kho-lạnh`: quy tắc EMQX chuyển tiếp
+3. Làm app web (Next.js trên Vercel + Supabase): quy tắc EMQX chuyển tiếp
    `relay2/+/state` tới `POST /api/…` → lưu Supabase; app gửi lệnh qua EMQX REST API vào `…/cmd`.
 4. Tuỳ chọn: OTA, lưu/khôi phục trạng thái relay (mặc định hiện tại: luôn TẮT khi khởi động – an toàn hơn),
    cấu hình Wi-Fi qua trang web thay vì sửa `app_secrets.h`.
